@@ -2,8 +2,8 @@ const { Recipe, Diet } = require(`../db.js`);
 const { Op } = require("sequelize");
 
 module.exports = async (req, res) => {
+  const { name, image, summary, healthScore, steps, diets } = req.body;
   try {
-    const { name, image, summary, healthScore, steps, diets } = req.body;
 
     if (!name || !summary)
       return res.status(404).send("Creacion Cancelada. Falto Informacion");
@@ -31,8 +31,9 @@ module.exports = async (req, res) => {
       },
     });
     await newRecipe.addDiets(dietsToAdd);
-    return res.json(newRecipe);
+    return res.status(200).send(newRecipe);
   } catch (error) {
-    return res.status(404).send({ error: error.message });
+    console.log(error)
+    return res.status(404).send({error:error.menssage});
   }
 };

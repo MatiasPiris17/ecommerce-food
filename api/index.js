@@ -19,21 +19,9 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
 const { conn, Diet } = require("./src/db.js");
-const typesOfDiets = [
-  "dairy free",
-  "low fodmap",
-  "gluten free",
-  "ketogenic",
-  "negetarian",
-  "paleolithic",
-  "pescetarian",
-  "primal",
-  "vegan",
-  "whole 30",
-  "lacto ovo vegetarian"
-];
+const typesOfDiets = require("./src/controllers/controllersDiets")
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
     typesOfDiets.map((diet)=> Diet.findOrCreate({where:{name:diet}}))

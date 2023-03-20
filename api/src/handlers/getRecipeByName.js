@@ -46,9 +46,16 @@ const getRecipeByName = async (req, res) => {
 
     const recipesAll = recipesApi.concat(recipesDB);
 
-    return recipesAll.length ? res.json(recipesAll) : res.json([]);
-  } catch (err) {
-    return res.status(404).json(err);
+    // return res.status(200).send(recipesAll) 
+    // return recipesAll.length ? res.json(recipesAll) : res.json([]);
+    if (recipesAll.length) {
+      return res.status(200).send(recipesAll) 
+    } else {
+      res.status(404).send('No existe Receta que contenga ese Nombre: ' + name.toLowerCase())
+    }
+  } catch (error) {
+    console.log(error)
+    return res.status(404).send({error:error.message});
   }
 };
 

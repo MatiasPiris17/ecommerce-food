@@ -30,7 +30,7 @@ const getRecipeById = async (req, res) => {
           through: { attributes: [] },
         },
       });
-      res.json(modifyDietAttributes(recipeDb));
+      return res.json(modifyDietAttributes(recipeDb));
     }
     return res.status(404).send("No se encontro receta");
   } catch (error) {
