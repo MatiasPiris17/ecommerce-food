@@ -1,44 +1,131 @@
-//----------------------->Paguina Home/ Paguina Principal<-----------------------
-//----------->DESCRIPCION<-----------------------
-//SearchBar: un input de búsqueda para encontrar recetas por nombre.
-//listado de cards con las recetas, con imagen y nombre dieta
-//click a una Card deberá redirigir al detalle de esa receta
-//Botones para filtrar por: tipo de dieta / si su origen es de la API o de la base de datos
-//Botones para: ordenar a-z p z-a
-//Botones para: ordenar por "comida saludable" (health score)
-//Paginado:el listado de recetas se hará por partes, debe mostrar un total de 9 recetas por página.
-
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+// eslint-disable-next-line
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes } from "../../redux/actions";
+import { getRecipes } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
+import "./Home.css";
 
-export default function Home() {
+
+function Home() {
   const dispatch = useDispatch();
-  const allRecipes = useSelector((state) => state.recipes);
+  // const allRecipes = useSelector((state) => state.recipes);
 
   useEffect(() => {
-    dispatch(getRecipes());
+    dispatch(getRecipes()); // eslint-disable-next-line
   }, []);
 
   function handbleClick(event) {
-    event.preventDefaul();
+    event.preventDefault();
     dispatch(getRecipes());
   }
+
   return (
-    <div>
-      <Link to="/recipes">Crear receta</Link>
-      <h1>PI Food</h1>
-      <button
-        onClick={(res) => {
-          handbleClick(res);
-        }}>
-        Cargar nuevamente todas las recetas
-      </button>
-      <div>
-        
+    <div className="homeContainer">
+
+
+      
+      {/* PRINCIPAL */}
+      <div className="nav-home">
+        <h2>RECIPE BOOK</h2>
+        {/* <SearchBar /> */}
+        <div className="create">
+          <Link to="/created" style={{ color: "black" }}>
+            Create Recipe
+          </Link>
+        </div>
       </div>
+
+
+
+      {/* FILTROS */}
+      <div className="filtros">
+      <div className="filter_AZ">
+          <label>ORDER BY A-Z</label>
+          <select /*onChange={(e) => handleOrderByName(e)}*/>
+            <option>Choose an option</option>
+            <option value="A-Z">A-Z</option>
+            <option value="Z-A">Z-A</option>
+          </select>
+        </div>
+        <div className="filter_score">
+          <label>ORDER BY SCORE</label>
+          <select /*onChange={(e) => handleOrderByScore(e)}*/>
+            <option>Choose an option</option>
+            <option value="all">All</option>
+            <option value="asc">Highest Score</option>
+            <option value="desc">Lowest Score</option>
+          </select>
+        </div>
+        <div className="filter_diet">
+          <label>FILTER BY DIET</label>
+          <select /*onChange={(e) => handleFilterRecipes(e)}*/ >
+            <option>Choose an option</option>
+            <option value="All">All</option>
+            {/* {diets &&
+              diets.map((d) => (
+                <option value={d.name} key={d.id}>
+                  {d.name}
+                </option>
+              ))} */}
+          </select>
+        </div>
+        <div className="filter_created">
+          <label>FILTER BY CREATED</label>
+          <select /*onChange={(e) => handleFilterCreated(e)}*/>
+            <option>Choose an option</option>
+            <option value="all">All</option>
+            <option value="db">Data Base</option>
+            <option value="api">Api</option>
+          </select>
+        </div >
+
+        {/* RESET */}
+        <button className="reset" onClick={(e) => {handbleClick(e)}}  >
+          RESET
+        </button>
+      </div>
+
+
+      {/* RECETAS */}
+      {/* <div className="container-card">
+        {currentRecipes && currentRecipes.map((recipe) => {
+          return (
+            <Card
+              key={recipe.id}
+              id={recipe.id}
+              name={recipe.title}
+              diets={
+                recipe.createDb
+                  ? recipe.TypeDiets
+                  : recipe.diets
+              }
+              image={
+                recipe.image ? (
+                  recipe.image
+                ) : (
+                  <image src="../../../../cooking.png" alt="recipe" />
+                )
+              }
+              score={recipe.healthScore}
+            />
+          );
+        }) }
+      </div> */}
+
+
+    {/* PAGUINADO */}
+    {/* <div className='container_pag'>
+        <Paginate
+          recipesPerPage={recipesPerPage}
+          allRecipes={allRecipes.length}
+          paginate={paginate}
+        />
+      </div> */}
+
+
     </div>
   );
 }
+
+export default Home;

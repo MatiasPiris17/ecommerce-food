@@ -1,10 +1,16 @@
-//----------------------->Detalle de la receta<-----------------------
-//----------->DESCRIPCION<-----------------------
-//se deberá mostrar toda la información específica de una receta:
-// ID.
-// Nombre.
-// Resumen del plato.
-// Nivel de comida saludable (health score).
-// Paso a paso.
-// Imagen.
-// Tipos de dieta.
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Detail.css"
+
+export default function Detail() {
+  return (
+    <div className="container">
+      <h1>Detalle de receta</h1>
+      <Link to="/home" >
+        <button>
+          Ingresar al menú
+        </button>
+      </Link>
+    </div>
+  );
+};
