@@ -2,16 +2,17 @@ const reduceObjectsRecipes = (r) => {
   return {
     id: r.id,
     name: r.title,
-    image: r.image,
-    diets: r.diets,
-    healthScore: r.healthScore,
     summary: r.summary,
+    healthScore: r.healthScore,
     steps: r.analyzedInstructions[0]
       ? r.analyzedInstructions[0].steps.reduce((obj, s) => {
           obj[s.number] = s.step;
           return obj;
         }, {})
       : {},
+    createdInDb:false,
+    image: r.image,
+    diets: r.diets,
   };
 };
 const modifyDietAttributes = (r) => {
