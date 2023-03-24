@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipes } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
-import "./Home.css";
 
 
 function Home() {
@@ -23,8 +22,8 @@ function Home() {
   return (
     <div className="homeContainer">
 
-
       
+          
       {/* PRINCIPAL */}
       <div className="nav-home">
         <h2>RECIPE BOOK</h2>
