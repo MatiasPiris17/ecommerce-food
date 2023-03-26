@@ -1,29 +1,40 @@
 import React from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 // eslint-disable-next-line
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipes } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
-
+import Card from "../Card/Card";
 
 function Home() {
   const dispatch = useDispatch();
-  // const allRecipes = useSelector((state) => state.recipes);
+  const allRecipes = useSelector((state) => state.recipes);
+  const diets = useSelector((state) => state.diets);
+
+  const [orden, setOrder] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recipesPorPage, setRecipesPorPage] = useState(9);
+  const indexOfLastRecipe = currentPage * recipesPorPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPorPage;
+  const currentRecipes = allRecipes.slice(
+    indexOfFirstRecipe,
+    indexOfLastRecipe
+  );
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     dispatch(getRecipes()); // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
-  function handbleClick(event) {
-    event.preventDefault();
-    dispatch(getRecipes());
+  //resetar el estado de la receta
+  function handleClick(e) {
+    e.preventDefault();
+    dispatch(getRecipes()); // dispatching the action
   }
 
   return (
     <div className="homeContainer">
-
-      
-          
       {/* PRINCIPAL */}
       <div className="nav-home">
         <h2>RECIPE BOOK</h2>
@@ -35,11 +46,9 @@ function Home() {
         </div>
       </div>
 
-
-
       {/* FILTROS */}
       <div className="filtros">
-      <div className="filter_AZ">
+        <div className="filter_AZ">
           <label>ORDER BY A-Z</label>
           <select /*onChange={(e) => handleOrderByName(e)}*/>
             <option>Choose an option</option>
@@ -58,7 +67,7 @@ function Home() {
         </div>
         <div className="filter_diet">
           <label>FILTER BY DIET</label>
-          <select /*onChange={(e) => handleFilterRecipes(e)}*/ >
+          <select /*onChange={(e) => handleFilterRecipes(e)}*/>
             <option>Choose an option</option>
             <option value="All">All</option>
             {/* {diets &&
@@ -77,52 +86,50 @@ function Home() {
             <option value="db">Data Base</option>
             <option value="api">Api</option>
           </select>
-        </div >
+        </div>
 
         {/* RESET */}
-        <button className="reset" onClick={(e) => {handbleClick(e)}}  >
+        <button
+          className="reset"
+          onClick={(e) => {
+            handleClick(e);
+          }}
+        >
           RESET
         </button>
       </div>
 
-
       {/* RECETAS */}
-      {/* <div className="container-card">
-        {currentRecipes && currentRecipes.map((recipe) => {
-          return (
-            <Card
-              key={recipe.id}
-              id={recipe.id}
-              name={recipe.title}
-              diets={
-                recipe.createDb
-                  ? recipe.TypeDiets
-                  : recipe.diets
-              }
-              image={
-                recipe.image ? (
-                  recipe.image
-                ) : (
-                  <image src="../../../../cooking.png" alt="recipe" />
-                )
-              }
-              score={recipe.healthScore}
-            />
-          );
-        }) }
-      </div> */}
+      <div>
+        {currentRecipes && 
+          currentRecipes.map((recipe) => {
+            return (
+              <Card
+                key={recipe.id}
+                id={recipe.id}
+                name={recipe.name}
+                diets={recipe.diets}
+                image={
+                  recipe.image ? (
+                    recipe.image
+                  ) : (
+                    <image src="../../../../cooking.png" alt="recipe" />
+                  )
+                }
+                score={recipe.healthScore}
+              />
+            );
+          })}
+      </div>
 
-
-    {/* PAGUINADO */}
-    {/* <div className='container_pag'>
+      {/* PAGUINADO */}
+      {/* <div className='container_pag'>
         <Paginate
           recipesPerPage={recipesPerPage}
           allRecipes={allRecipes.length}
           paginate={paginate}
         />
       </div> */}
-
-
     </div>
   );
 }

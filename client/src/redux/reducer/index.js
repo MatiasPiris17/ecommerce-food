@@ -2,6 +2,9 @@ import { GET_RECIPES } from "../actions/actions-types";
 
 const initialState = {
   recipes: [],
+  allRecipes:[],
+  diets:[],
+  detail:{}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -10,8 +13,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: action.payload,
+        allRecipes:action.payload,
       };
-    default:
+// DEMAS ACCIONES
+
+      default:
+        return state;
   }
 };
 
