@@ -6,6 +6,7 @@ import { getRecipes } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginate from "../Paginate/Paginate";
+import SearchBar from "../SearchBar/SearchBar";
 
 function Home() {
   const dispatch = useDispatch();
@@ -39,11 +40,9 @@ function Home() {
       {/* PRINCIPAL */}
       <div className="nav-home">
         <h2>RECIPE BOOK</h2>
-
-        {/* <SearchBar /> */}
-        
+        <SearchBar />
         <div className="create">
-          <Link to="/created" style={{ color: "black" }}>
+          <Link to="/home/create" style={{ color: "black" }}>
             Create Recipe
           </Link>
         </div>
