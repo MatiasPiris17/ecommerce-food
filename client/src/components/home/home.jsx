@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRecipes } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
+import Paginate from "../Paginate/Paginate";
 
 function Home() {
   const dispatch = useDispatch();
@@ -38,7 +39,9 @@ function Home() {
       {/* PRINCIPAL */}
       <div className="nav-home">
         <h2>RECIPE BOOK</h2>
+
         {/* <SearchBar /> */}
+        
         <div className="create">
           <Link to="/created" style={{ color: "black" }}>
             Create Recipe
@@ -123,13 +126,14 @@ function Home() {
       </div>
 
       {/* PAGUINADO */}
-      {/* <div className='container_pag'>
-        <Paginate
-          recipesPerPage={recipesPerPage}
-          allRecipes={allRecipes.length}
-          paginate={paginate}
-        />
-      </div> */}
+          <div>
+            <Paginate 
+            recipesPorPage={recipesPorPage}
+            allRecipes={allRecipes.length}
+            paginate={paginate}/>
+          </div>
+
+
     </div>
   );
 }
