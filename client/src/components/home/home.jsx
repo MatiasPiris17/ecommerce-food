@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginate from "../Paginate/Paginate";
 import SearchBar from "../SearchBar/SearchBar";
+import style from "./Home.module.css";
 
 function Home() {
   const dispatch = useDispatch();
@@ -66,21 +67,21 @@ function Home() {
   }
 
   return (
-    <div className="homeContainer">
+    <div className={style.homeContainer}>
       {/* PRINCIPAL */}
-      <div className="nav-home">
-        <h2>RECIPE BOOK</h2>
+      <div className={style.navHome}>
+        <h2>PI FOOD</h2>
         <SearchBar />
         <div>
-          <Link to="/home/create" style={{ color: "black" }}>
-            Create Recipe
+          <Link to="/home/create">
+           <button>CREATE RECIPE</button> 
           </Link>
         </div>
       </div>
 
       {/* FILTROS */}
-      <div className="filtros">
-        <div className="filter_AZ">
+      <div className={style.filters}>
+        <div className={style.filterAZ}>
           <label>ORDER BY A-Z</label>
           <select onChange={(e) => handleOrderByName(e)}>
             <option>Choose an option</option>
@@ -88,7 +89,7 @@ function Home() {
             <option value="Z-A">Z-A</option>
           </select>
         </div>
-        <div className="filter_score">
+        <div className={style.filterScore}>
           <label>ORDER BY SCORE</label>
           <select onChange={(e) => handleOrderByScore(e)}>
             <option>Choose an option</option>
@@ -97,7 +98,7 @@ function Home() {
             <option value="desc">Lowest Score</option>
           </select>
         </div>
-        <div className="filter_diet">
+        <div className={style.filterDiet}>
           <label>FILTER BY DIET</label>
           <select onChange={(e) => handleFilterRecipes(e)}>
             <option>Choose an option</option>
@@ -110,7 +111,7 @@ function Home() {
               ))}
           </select>
         </div>
-        <div className="filter_created">
+        <div className={style.filterCreated}>
           <label>FILTER BY CREATED</label>
           <select onChange={(e) => handleFilterCreated(e)}>
             <option>Choose an option</option>
@@ -122,7 +123,7 @@ function Home() {
 
         {/* RESET */}
         <button
-          className="reset"
+         className={style.reset}
           onClick={(e) => {
             handleClick(e);
           }}
@@ -132,7 +133,7 @@ function Home() {
       </div>
 
       {/* RECETAS */}
-      <div>
+      <div className={style.recipesContainer}>
         {currentRecipes &&
           currentRecipes.map((recipe) => {
             return (
@@ -155,7 +156,7 @@ function Home() {
       </div>
 
       {/* PAGUINADO */}
-      <div>
+      <div className={style.paginate}>
         <Paginate
           recipesPorPage={recipesPorPage}
           allRecipes={allRecipes.length}

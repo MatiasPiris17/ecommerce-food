@@ -1,0 +1,27 @@
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.pageItem{
+    padding: 0.5rem;
+}
+
+.pageBtn{
+    font-size: 12px;
+    background-color: white;
+    color: #A7C957;
+    font-family: 'Roboto', sans-serif;
+    margin-right: 0;
+    border-radius: 0.2rem;
+    border: solid 1px #A7C957;
+    padding: 0.15rem 0.8rem;
+}
+
+.pageBtn:hover{
+    cursor: pointer;
+    background-color: #A7C957;
+    color: white;
+}

@@ -1,0 +1,123 @@
+.homeContainer {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5e9c8e7;
+  }
+  
+  .navHome {
+    display: flex;
+    justify-content: space-between;
+    background-color: #eedba5e7;
+    align-items: center;
+    width: 100%;
+  }
+  .navHome h2{
+    font-family: "Montserrat", sans-serif;
+    color: #1a1a1a;
+    font-size: 1.8rem;
+  }
+  .navHome button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #f1d892e7;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  } 
+  .navHome button:hover {
+    background-color: #e04f53;
+  }
+   .filters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .filterAZ,
+  .filterScore,
+  .filterDiet,
+  .filterCreated {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2rem;
+  }
+   
+  .filterAZ label,
+  .filterScore label,
+  .filterDiet label,
+  .filterCreated label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+   
+  .filterAZ select,
+  .filterScore select,
+  .filterDiet select,
+  .filterCreated select {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .reset {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #f1d892e7;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .reset:hover {
+    background-color: #e04f53;
+  }
+
+  .recipesContainer{
+    grid-column-start: 2;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 11;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-wrap: wrap;
+    width: 10rem;
+    gap:10px 60px;
+    font-family: 'Roboto', sans-serif;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    margin-top: 3rem;
+  }
+
+  .paginate{
+    grid-column-start: 1;
+    grid-column-end: 13;
+    grid-row-start: 13;
+    grid-row-end: 13;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    font-family: 'Roboto', sans-serif;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+  }

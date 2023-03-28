@@ -1,24 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import style from "./Card.module.css";
 
 function Card({ name, diets, image, score, id }) {
   return (
-    <div>
-      <div>
+    <div className={style.card}>
+      <div className={style.imgContainer}>
         <img src={image} alt={name} width="200px" height="250px" />
       </div>
-      <div>
-        <h2>{name}</h2>
+      <div className={style.cardInfo}>
+        <h3>{name}</h3>
       </div>
-      <div>
-        <h3>{diets}</h3>
+      <div className={style.itemCard}>
+        <p>{diets}</p>
       </div>
-      <div>
-        <h3>Health Score: {score}</h3>
+      <div className={style.itemScore}>
+        <p>Health Score: {score}</p>
       </div>
-      <div>
+      <div className={style.btn}>
         <Link to={`/recipe/${id}`} style={{ textDecoration: "none" }}>
-          <button>See more</button>
+          <button className={style.btn}>See more</button>
         </Link>
       </div>
     </div>
