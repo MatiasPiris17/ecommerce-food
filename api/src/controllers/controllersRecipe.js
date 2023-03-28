@@ -4,13 +4,10 @@ const reduceObjectsRecipes = (r) => {
     name: r.title,
     summary: r.summary,
     healthScore: r.healthScore,
-    steps: r.analyzedInstructions[0]
-      ? r.analyzedInstructions[0].steps.reduce((obj, s) => {
-          obj[s.number] = s.step;
-          return obj;
-        }, {})
-      : {},
-    createdInDb:false,
+    steps: r.analyzedInstructions
+      .map((e) => e.steps.map((steps) => steps.step))
+      .flat(),
+    createdInDb: false,
     image: r.image,
     diets: r.diets,
   };
