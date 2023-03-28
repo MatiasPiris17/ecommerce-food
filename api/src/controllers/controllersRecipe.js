@@ -9,7 +9,7 @@ const reduceObjectsRecipes = (r) => {
       .flat(),
     createdInDb: false,
     image: r.image,
-    diets: r.diets,
+    diets: r.diets.map((e) => e + ', '),
   };
 };
 const modifyDietAttributes = (r) => {
