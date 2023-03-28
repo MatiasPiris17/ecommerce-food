@@ -7,6 +7,7 @@ import {
   GET_TYPES_OF_DIET,
   ORDER_BY_NAME,
   POST_RECIPES,
+  ORDER_BY_SCORE
 } from "../actions/actions-types";
 
 const initialState = {
@@ -44,34 +45,20 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         detail: action.payload,
       };
-    // case ORDER_BY_NAME:
-    //   let order =
-    //     action.payload === "A-Z"
-    //       ? state.recipes.sort((a, b) => {
-    //           if (a.name.toLowerCase().localeCompare(b.name.toLowerCase())) return 1;
-    //           if (b.name.toLowerCase() > a.name.toLowerCase()) return -1;
-    //           return 0;
-    //         })
-    //       : state.recipes.sort((a, b) => {
-    //           if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
-    //           if (b.name.toLowerCase() > a.name.toLowerCase()) return 1;
-    //           return 0;
-    //         });
-    //   return { ...state, recipes: order };
     case ORDER_BY_NAME:
       let order =
         action.payload === "A-Z"
-          ? state.recipes.sort((a, b) =>
-              a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-            )
-          : state.recipes.sort((a, b) =>
-              b.name.toLowerCase().localeCompare(a.name.toLowerCase())
-            );
-      return {
-        ...state,
-        recipes: order,
-      };
-
+          ? state.recipes.sort((a, b) => {
+              if (a.name.toLowerCase().localeCompare(b.name.toLowerCase())) return 1;
+              if (b.name.toLowerCase() > a.name.toLowerCase()) return -1;
+              return 0;
+            })
+          : state.recipes.sort((a, b) => {
+              if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+              if (b.name.toLowerCase() > a.name.toLowerCase()) return 1;
+              return 0;
+            });
+      return { ...state, recipes: order };
     case FILTER_BY_DIET:
       const allInfo = state.allRecipes;
       const filteredRecipes =
@@ -94,6 +81,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         recipes: action.payload === "all" ? allData : createdFilter,
       };
+      case ORDER_BY_SCORE:
+        let orderScore = action.payload === "asc"
+        ? state.recipes.sort((a,b) => {
+          if (a.healthScore > b.healthScore) return -1
+          if(b.healthScore > a.healthScore) return 1
+          return 0
+      }) : state.recipes.sort((a,b)=> {
+        if(a.healthScore > b.healthScore) return 1
+        if(b.healthScore > a.healthScore) return -1
+        return 0
+      }) 
+      return {
+        ...state,
+        recipes: action.payload === "asc" ? state.allRecipes:orderScore,
+      }
 
     default:
       return state;
