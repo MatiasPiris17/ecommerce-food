@@ -2,7 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 // eslint-disable-next-line
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes } from "../../redux/actions/index";
+import {
+  getRecipes,
+  orderByName,
+  orderByScore,
+  filterRecipesByDiet,
+  getTypesOfDiet,
+  filterCreated,
+} from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginate from "../Paginate/Paginate";
@@ -28,11 +35,34 @@ function Home() {
   useEffect(() => {
     dispatch(getRecipes()); // eslint-disable-next-line
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(getTypesOfDiet());
+  }, [dispatch]);
 
   //resetar el estado de la receta
-  function handleClick(e) {
-    e.preventDefault();
+  function handleClick(event) {
+    event.preventDefault();
     dispatch(getRecipes()); // dispatching the action
+  }
+
+  function handleOrderByName(event) {
+    event.preventDefault();
+    dispatch(orderByName());
+    setCurrentPage(1);
+    setOrder(event.target.value);
+  }
+  function handleOrderByScore(event) {
+    event.preventDefault();
+    dispatch(orderByScore(event.target.value));
+    setCurrentPage(1);
+    setOrder(event.target.value);
+  }
+  function handleFilterRecipes(event) {
+    dispatch(filterRecipesByDiet(event.target.value));
+  }
+  function handleFilterCreated(event) {
+    event.preventDefault();
+    dispatch(filterCreated(event.target.value));
   }
 
   return (
@@ -41,7 +71,7 @@ function Home() {
       <div className="nav-home">
         <h2>RECIPE BOOK</h2>
         <SearchBar />
-        <div >
+        <div>
           <Link to="/home/create" style={{ color: "black" }}>
             Create Recipe
           </Link>
@@ -52,7 +82,7 @@ function Home() {
       <div className="filtros">
         <div className="filter_AZ">
           <label>ORDER BY A-Z</label>
-          <select /*onChange={(e) => handleOrderByName(e)}*/>
+          <select onChange={(e) => handleOrderByName(e)}>
             <option>Choose an option</option>
             <option value="A-Z">A-Z</option>
             <option value="Z-A">Z-A</option>
@@ -60,7 +90,7 @@ function Home() {
         </div>
         <div className="filter_score">
           <label>ORDER BY SCORE</label>
-          <select /*onChange={(e) => handleOrderByScore(e)}*/>
+          <select onChange={(e) => handleOrderByScore(e)}>
             <option>Choose an option</option>
             <option value="all">All</option>
             <option value="asc">Highest Score</option>
@@ -69,20 +99,20 @@ function Home() {
         </div>
         <div className="filter_diet">
           <label>FILTER BY DIET</label>
-          <select /*onChange={(e) => handleFilterRecipes(e)}*/>
+          <select onChange={(e) => handleFilterRecipes(e)}>
             <option>Choose an option</option>
             <option value="All">All</option>
-            {/* {diets &&
+            {diets &&
               diets.map((d) => (
                 <option value={d.name} key={d.id}>
                   {d.name}
                 </option>
-              ))} */}
+              ))}
           </select>
         </div>
         <div className="filter_created">
           <label>FILTER BY CREATED</label>
-          <select /*onChange={(e) => handleFilterCreated(e)}*/>
+          <select onChange={(e) => handleFilterCreated(e)}>
             <option>Choose an option</option>
             <option value="all">All</option>
             <option value="db">Data Base</option>
@@ -103,7 +133,7 @@ function Home() {
 
       {/* RECETAS */}
       <div>
-        {currentRecipes && 
+        {currentRecipes &&
           currentRecipes.map((recipe) => {
             return (
               <Card
@@ -125,14 +155,13 @@ function Home() {
       </div>
 
       {/* PAGUINADO */}
-          <div>
-            <Paginate 
-            recipesPorPage={recipesPorPage}
-            allRecipes={allRecipes.length}
-            paginate={paginate}/>
-          </div>
-
-
+      <div>
+        <Paginate
+          recipesPorPage={recipesPorPage}
+          allRecipes={allRecipes.length}
+          paginate={paginate}
+        />
+      </div>
     </div>
   );
 }

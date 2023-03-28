@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import style from "./Landing.module.css";
 
-function Landing () {
+function Landing() {
   return (
-        <div className="container">
-          <div className="item">
-            <h1>RECIPE BOOK</h1>
-            <Link to="./home" className="button">
-              <button>HOME</button>
-            </Link>
-          </div>
+    <div className={style.container}>
+        <div className={style.item}>
+          <h1>PI FOOD</h1>
+          <Link to="./home" >
+            <button>HOME</button>
+          </Link>
         </div>
+      </div>
   );
-};
+}
 
-export default Landing
+export default Landing;

@@ -1,8 +1,11 @@
 import {
+  FILTER_BY_DIET,
+  FILTER_CREATED,
   GET_DETAIL,
   GET_RECIPES,
   GET_RECIPES_BY_NAME,
   GET_TYPES_OF_DIET,
+  ORDER_BY_NAME,
   POST_RECIPES,
 } from "../actions/actions-types";
 
@@ -40,6 +43,56 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         detail: action.payload,
+      };
+    // case ORDER_BY_NAME:
+    //   let order =
+    //     action.payload === "A-Z"
+    //       ? state.recipes.sort((a, b) => {
+    //           if (a.name.toLowerCase().localeCompare(b.name.toLowerCase())) return 1;
+    //           if (b.name.toLowerCase() > a.name.toLowerCase()) return -1;
+    //           return 0;
+    //         })
+    //       : state.recipes.sort((a, b) => {
+    //           if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+    //           if (b.name.toLowerCase() > a.name.toLowerCase()) return 1;
+    //           return 0;
+    //         });
+    //   return { ...state, recipes: order };
+    case ORDER_BY_NAME:
+      let order =
+        action.payload === "A-Z"
+          ? state.recipes.sort((a, b) =>
+              a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+            )
+          : state.recipes.sort((a, b) =>
+              b.name.toLowerCase().localeCompare(a.name.toLowerCase())
+            );
+      return {
+        ...state,
+        recipes: order,
+      };
+
+    case FILTER_BY_DIET:
+      const allInfo = state.allRecipes;
+      const filteredRecipes =
+        action.payload === "All"
+          ? allInfo
+          : allInfo.filter((recipe) =>
+              recipe?.diets?.includes(`${action.payload}, `)
+            );
+      return {
+        ...state,
+        recipes: filteredRecipes,
+      };
+    case FILTER_CREATED:
+      const allData = state.allRecipes;
+      const createdFilter =
+        action.payload === "db"
+          ? allData.filter((recipe) => recipe.createdInDb)
+          : allData.filter((recipe) => !recipe.createdInDb);
+      return {
+        ...state,
+        recipes: action.payload === "all" ? allData : createdFilter,
       };
 
     default:
