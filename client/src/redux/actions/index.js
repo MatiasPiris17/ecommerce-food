@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { GET_RECIPES, GET_DIETS, GET_RECIPES_BY_NAME } from "./actions-types";
+import { GET_RECIPES, GET_DIETS, GET_RECIPES_BY_NAME, GET_DETAIL } from "./actions-types";
 import axios from "axios";
 
 export const getRecipes = () => {
@@ -8,21 +8,35 @@ export const getRecipes = () => {
       const res = (await axios.get("http://localhost:3001/recipes")).data;
       dispatch({ type: GET_RECIPES, payload: res });
     } catch (error) {
+      alert(error);
       console.error(error);
     }
   };
 };
 // export function getTypesOfDiet() {}
 
-export function getRecipeByName (name) {
-  return async function (dispatch){
+export function getRecipeByName(name) {
+  return async function (dispatch) {
     try {
-      const res = (await axios.get(`http://localhost:3001/recipes?name=${name}`)).data
-      dispatch({type:GET_RECIPES_BY_NAME, payload:res})
+      const res = (
+        await axios.get(`http://localhost:3001/recipes?name=${name}`)
+      ).data;
+      dispatch({ type: GET_RECIPES_BY_NAME, payload: res });
     } catch (error) {
+      alert("This recipe doesn't exist");
+      console.error(error);
+    }
+  };
+}
+
+export function getDetail(id){
+  return async function (dispatch) {
+    try {
+      const res = (await axios.get(`http://localhost:3001/recipes/${id}`)).data
+      dispatch({type:GET_DETAIL, payload:res})
+    } catch (error) {
+      alert('This recipe does not exist');
       console.error(error);
     }
   }
 }
-
-

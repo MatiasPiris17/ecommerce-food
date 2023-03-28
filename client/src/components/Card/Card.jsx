@@ -17,7 +17,7 @@ function Card({ name, diets, image, score, id }) {
         <h3>Health Score: {score}</h3>
       </div>
       <div>
-        <Link to={`/recipes/${id}`} style={{ textDecoration: "none" }}>
+        <Link to={`/recipe/${id}`} style={{ textDecoration: "none" }}>
           <button>See more</button>
         </Link>
       </div>
