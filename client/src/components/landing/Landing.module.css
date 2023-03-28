@@ -16,35 +16,36 @@
   grid-row-end: 4;
 }
 
-h1 {
+.item h1 {
   grid-row-start: 2;
   grid-row-end: 3;
   font-size: 5rem;
   color: white;
   text-align: center;
   margin-top: 0;
+  text-align: center;
+  /* font-size: 48px; */
+  /* font-weight: bold; */
+  text-shadow: 2px 2px black;
+  color: #ffffff;
 }
 
 .container button{
   grid-row-start: 3;
   grid-row-end: 4;
   font-size: 20px;
-  color: white;
-  background-color: #A7C957;
+  color: fff;
+  background-color: #f1d892e7;
   letter-spacing: 2.5px;
   border: none;
   border-radius: 10px;
   padding: 10px 80px;
   cursor: pointer;
   margin-left: 6rem;
+  transition: all 0.3s ease;
 }
 
-button:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.32);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(9.5px);
-  -webkit-backdrop-filter: blur(9.5px);
-  transform: translateY(-7px);
+.container button:hover {
+  background-color: #e04f53;
 }
 
