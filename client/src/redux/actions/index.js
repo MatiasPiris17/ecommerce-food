@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { GET_RECIPES, GET_DIETS, GET_RECIPES_BY_NAME, GET_DETAIL } from "./actions-types";
+import { GET_RECIPES, GET_DIETS, GET_RECIPES_BY_NAME, GET_DETAIL,GET_TYPES_OF_DIET, POST_RECIPES } from "./actions-types";
 import axios from "axios";
 
 export const getRecipes = () => {
@@ -13,7 +13,17 @@ export const getRecipes = () => {
     }
   };
 };
-// export function getTypesOfDiet() {}
+ export function getTypesOfDiet() {
+  return async function(dispatch) {
+    try {
+      const res = (await axios.get("http://localhost:3001/diets")).data;
+      dispatch({ type: GET_TYPES_OF_DIET, payload: res });
+    } catch (error) {
+      alert(error);
+      console.error(error);
+    }
+  };
+ }
 
 export function getRecipeByName(name) {
   return async function (dispatch) {
@@ -29,6 +39,18 @@ export function getRecipeByName(name) {
   };
 }
 
+export function postRecipe(payload){
+  return async function(){
+    try {
+      const res = await axios.post('http://localhost:3001/recipes/create', payload)
+      return {type:POST_RECIPES, res}
+    } catch (error) {
+      alert(error);
+      console.error(error);
+    }
+  }
+}
+
 export function getDetail(id){
   return async function (dispatch) {
     try {
@@ -40,3 +62,4 @@ export function getDetail(id){
     }
   }
 }
+

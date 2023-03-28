@@ -41,7 +41,7 @@ function Home() {
       <div className="nav-home">
         <h2>RECIPE BOOK</h2>
         <SearchBar />
-        <div className="create">
+        <div >
           <Link to="/home/create" style={{ color: "black" }}>
             Create Recipe
           </Link>
