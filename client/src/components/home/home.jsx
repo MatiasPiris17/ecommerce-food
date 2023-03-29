@@ -84,16 +84,15 @@ function Home() {
         <div className={style.filterAZ}>
           <label>ORDER BY A-Z</label>
           <select onChange={(e) => handleOrderByName(e)}>
-            <option>Choose an option</option>
-            <option value="A-Z">A-Z</option>
-            <option value="Z-A">Z-A</option>
+            <option disabled selected>Choose an option</option>
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
           </select>
         </div>
         <div className={style.filterScore}>
           <label>ORDER BY SCORE</label>
           <select onChange={(e) => handleOrderByScore(e)}>
-            <option>Choose an option</option>
-            <option value="all">All</option>
+            <option disabled selected>Choose an option</option>
             <option value="asc">Highest Score</option>
             <option value="desc">Lowest Score</option>
           </select>
@@ -101,7 +100,7 @@ function Home() {
         <div className={style.filterDiet}>
           <label>FILTER BY DIET</label>
           <select onChange={(e) => handleFilterRecipes(e)}>
-            <option>Choose an option</option>
+            <option disabled selected>Choose an option</option>
             <option value="All">All</option>
             {diets &&
               diets.map((d) => (
@@ -114,7 +113,7 @@ function Home() {
         <div className={style.filterCreated}>
           <label>FILTER BY CREATED</label>
           <select onChange={(e) => handleFilterCreated(e)}>
-            <option>Choose an option</option>
+            <option disabled selected>Choose an option</option>
             <option value="all">All</option>
             <option value="db">Data Base</option>
             <option value="api">Api</option>

@@ -7,7 +7,7 @@ import {
   GET_TYPES_OF_DIET,
   ORDER_BY_NAME,
   POST_RECIPES,
-  ORDER_BY_SCORE
+  ORDER_BY_SCORE,
 } from "../actions/actions-types";
 
 const initialState = {
@@ -35,11 +35,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         recipes: action.payload,
       };
-      case POST_RECIPES:
-        return {
-          ...state,
-          recipes: [...state.recipes, action.payload],
-        }
+    case POST_RECIPES:
+      return {
+        ...state,
+        recipes: [...state.recipes, action.payload],
+      };
     case GET_DETAIL:
       return {
         ...state,
@@ -47,10 +47,11 @@ const rootReducer = (state = initialState, action) => {
       };
     case ORDER_BY_NAME:
       let order =
-        action.payload === "A-Z"
+        action.payload === "asc"
           ? state.recipes.sort((a, b) => {
-              if (a.name.toLowerCase().localeCompare(b.name.toLowerCase())) return 1;
-              if (b.name.toLowerCase() > a.name.toLowerCase()) return -1;
+              if (a.name.toLowerCase() > b.name.toLowerCase())
+                return 1;
+              if (b.name.toLowerCase() > a.name.toLowerCase())return -1;
               return 0;
             })
           : state.recipes.sort((a, b) => {
@@ -59,6 +60,7 @@ const rootReducer = (state = initialState, action) => {
               return 0;
             });
       return { ...state, recipes: order };
+
     case FILTER_BY_DIET:
       const allInfo = state.allRecipes;
       const filteredRecipes =
@@ -71,6 +73,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         recipes: filteredRecipes,
       };
+
     case FILTER_CREATED:
       const allData = state.allRecipes;
       const createdFilter =
@@ -81,21 +84,24 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         recipes: action.payload === "all" ? allData : createdFilter,
       };
-      case ORDER_BY_SCORE:
-        let orderScore = action.payload === "asc"
-        ? state.recipes.sort((a,b) => {
-          if (a.healthScore > b.healthScore) return -1
-          if(b.healthScore > a.healthScore) return 1
-          return 0
-      }) : state.recipes.sort((a,b)=> {
-        if(a.healthScore > b.healthScore) return 1
-        if(b.healthScore > a.healthScore) return -1
-        return 0
-      }) 
+      
+    case ORDER_BY_SCORE:
+      let orderScore =
+        action.payload === "asc"
+          ? state.recipes.sort((a, b) => {
+              if (a.healthScore > b.healthScore) return -1;
+              if (b.healthScore > a.healthScore) return 1;
+              return 0;
+            })
+          : state.recipes.sort((a, b) => {
+              if (a.healthScore > b.healthScore) return 1;
+              if (b.healthScore > a.healthScore) return -1;
+              return 0;
+            });
       return {
         ...state,
-        recipes: action.payload === "asc" ? state.allRecipes:orderScore,
-      }
+        recipes: action.payload === "asc" ? state.allRecipes : orderScore,
+      };
 
     default:
       return state;
