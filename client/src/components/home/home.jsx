@@ -23,38 +23,38 @@ function Home() {
 
   const [orden, setOrder] = useState("");
   
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recipesPorPage, setRecipesPorPage] = useState(9);
-  const indexOfLastRecipe = currentPage * recipesPorPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - recipesPorPage;
+  const [currentPage, setCurrentPage] = useState(1); //número de página actual
+  const [recipesPorPage, setRecipesPorPage] = useState(9);//la cantidad de recetas que se muestran
+  const indexOfLastRecipe = currentPage * recipesPorPage; //se calcula el índice de la última receta
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPorPage; //se calcula el índice de la primera receta
   const currentRecipes = allRecipes.slice(
     indexOfFirstRecipe,
     indexOfLastRecipe
-  );
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  );//se obtiene un subconjunto de recetas del arreglo allRecipes
+  const paginate = (pageNumber) => setCurrentPage(pageNumber); // toma un número de página como argumento y actualiza el estado de currentPage con ese número
 
-  useEffect(() => {
-    dispatch(getRecipes()); // eslint-disable-next-line
+  useEffect(() => { //Imprime todas las recetas
+    dispatch(getRecipes());
   }, [dispatch]);
 
-  useEffect(() => {
+  useEffect(() => { //Imprime todas las dietas
     dispatch(getTypesOfDiet());
   }, [dispatch]);
 
   //resetar el estado de la receta
   function handleClick(event) {
-    event.preventDefault();
+    event.preventDefault(); // previene el comportamiento predeterminado del evento
     dispatch(getRecipes()); // dispatching the action
   }
 
   function handleOrderByName(event) {
     event.preventDefault();
     dispatch(orderByName(event.target.value));
-    setCurrentPage(1);
+    setCurrentPage(1); //la página se reinicie en 1
     setOrder(event.target.value);
   }
   function handleOrderByScore(event) {
-    event.preventDefault();
+    event.preventDefault(); 
     dispatch(orderByScore(event.target.value));
     setCurrentPage(1);
     setOrder(event.target.value);
