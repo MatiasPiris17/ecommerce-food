@@ -35,11 +35,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         recipes: action.payload,
       };
-    case POST_RECIPES:
-      return {
-        ...state,
-        recipes: [...state.recipes, action.payload],
-      };
+      case POST_RECIPES:
+        return {
+          ...state,
+          recipes: [...state.recipes, action.payload],
+        }
     case GET_DETAIL:
       return {
         ...state,

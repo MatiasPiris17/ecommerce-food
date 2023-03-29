@@ -48,7 +48,7 @@ function Home() {
 
   function handleOrderByName(event) {
     event.preventDefault();
-    dispatch(orderByName());
+    dispatch(orderByName(event.target.value));
     setCurrentPage(1);
     setOrder(event.target.value);
   }

@@ -52,10 +52,7 @@ export function getRecipeByName(name) {
 export function postRecipe(payload) {
   return async function () {
     try {
-      const res = await axios.post(
-        "http://localhost:3001/recipes/create",
-        payload
-      );
+      const res = await axios.post('http://localhost:3001/recipes/create', payload);
       return { type: POST_RECIPES, res };
     } catch (error) {
       alert(error);

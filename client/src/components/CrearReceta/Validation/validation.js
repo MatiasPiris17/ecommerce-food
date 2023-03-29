@@ -5,16 +5,16 @@ export const validationsForm = (input) => {
 
   if (!input.name.trim()) {
     errors.name = "Title is required";
-  } else if (!regexString.test(input.title.trim())) {
+  } else if (!regexString.test(input.name.trim())) {
     errors.name = "Title must be only letters";
   } else if (input.name.length > 80 || input.name.length < 3) {
     errors.name = "Title must be between 3 and 80 characters";
   }
 
-  if (!input.summary.trim()) {
+  if (!input.summary || !input.summary.trim()) {
     errors.summary = "Summary is required";
   } else if (!regexString.test(input.summary.trim())) {
-    errors.name = "Summary must be only letters";
+    errors.summary = "Summary must be only letters";
   } else if (input.summary.length > 255 || input.summary.length < 3) {
     errors.summary = "Summary must be between 3 and 255 characters";
   }
