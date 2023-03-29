@@ -3,7 +3,7 @@ export const validationsForm = (input) => {
 
   let regexString = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
 
-  if (!input.title.trim()) {
+  if (!input.name.trim()) {
     errors.name = "Title is required";
   } else if (!regexString.test(input.title.trim())) {
     errors.name = "Title must be only letters";
@@ -14,7 +14,7 @@ export const validationsForm = (input) => {
   if (!input.summary.trim()) {
     errors.summary = "Summary is required";
   } else if (!regexString.test(input.summary.trim())) {
-    errors.title = "Summary must be only letters";
+    errors.name = "Summary must be only letters";
   } else if (input.summary.length > 255 || input.summary.length < 3) {
     errors.summary = "Summary must be between 3 and 255 characters";
   }

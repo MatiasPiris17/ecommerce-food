@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { getTypesOfDiet, postRecipe } from "../../redux/actions";
-import {validationsForm} from "./Validation/validation"
+import { validationsForm } from "./Validation/validation";
+import style from "./RecipeForm.module.css";
 
 export default function Form() {
   const dispatch = useDispatch();
@@ -67,29 +68,34 @@ export default function Form() {
   };
 
   return (
-    <div>
-      <div>
+    <div className={style.containerForm}>
+      <div className={style.form}>
         <h3>CREATE RECIPE</h3>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div>
-            <div>
-              <label>Title</label>
+          <div className={style.formGroup}>
+            <div className={style.inputTitle}>
+              <label>
+                <b>TITLE</b>
+              </label>
               <br />
               <input
+                className={style.input}
                 type="text"
-                name="title"
+                name="name"
                 onBlur={(e) => handleBlur(e)}
                 value={input.name}
                 onChange={(e) => handleChange(e)}
               />
             </div>
             {errors.name && <p>{errors.name}</p>}
-            <div className="input-summary">
+
+            <div className={style.inputSummary}>
               <label>
                 <b>SUMMARY</b>
               </label>
               <br />
               <input
+                className={style.input}
                 type="text"
                 name="summary"
                 onBlur={(e) => handleBlur(e)}
@@ -98,21 +104,22 @@ export default function Form() {
               />
             </div>
             {errors.summary && <p>{errors.summary}</p>}
-            <div>
+            <div className={style.containerSteps}>
               <label>
                 <b>STEPS</b>
               </label>
               <br />
               <input
+                className={style.input}
                 type="text"
-                name="instructions"
+                name="steps"
                 value={input.steps}
                 onBlur={(e) => handleBlur(e)}
                 onChange={(e) => handleChange(e)}
               />
             </div>
             {errors.steps && <p>{errors.steps}</p>}
-            <div>
+            <div className={style.containerDiets}>
               <span>
                 <b>TYPE OF DIET</b>
               </span>
@@ -122,9 +129,9 @@ export default function Form() {
                   <label>
                     <input
                       key={diet.id}
-                      name={'diets'}
+                      name={"diets"}
                       value={diet.name}
-                      className="input"
+                      className={style.input}
                       type="checkbox"
                       onBlur={(e) => handleBlur(e)}
                       onChange={(e) => handleCheck(e)}
@@ -135,12 +142,12 @@ export default function Form() {
                 </div>
               ))}
             </div>
-            <div className="container-score">
+            <div className={style.containerScore}>
               <label>
                 <b>HEALTH SCORE</b>
               </label>
               <input
-                className="input"
+                className={style.input}
                 type="number"
                 name="healthScore"
                 value={Number(input.healthScore)}
@@ -149,7 +156,7 @@ export default function Form() {
               />
             </div>
             {errors.healthScore && <p>{errors.healthScore}</p>}
-            <div className="container-image">
+            <div className={style.containerImage}>
               <label>
                 <b>IMAGE</b>
               </label>
@@ -163,12 +170,12 @@ export default function Form() {
               />
             </div>
             {errors.image && <p>{errors.image}</p>}
-            <div >
-              <button type="submit"  >
+            <div className={style.containerSumit}>
+              <button type="submit" className={style.btnCreate}>
                 <b>CREATE</b>
               </button>
               <Link to="/home">
-                <button>
+                <button className={style.btnHome}>
                   <b>HOME</b>
                 </button>
               </Link>

@@ -1,0 +1,226 @@
+.containerForm{
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12,1fr);
+  /* background-image: url('../../shared/images/cook-2364221_1920.jpg'); */
+  background-color: #f5e9c8e7;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+}
+
+.form {
+  height: auto;
+  grid-column-start: 3;
+  grid-column-end: 11;
+  grid-row-start: 1;
+  grid-row-end: 13;
+  margin-top:2rem;
+  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+.formGroup{
+margin: 3rem;
+}
+
+.formGroup p{
+  font-size: 12px;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  margin-left: 5rem;
+}
+
+.form h3 {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: 1.3rem;
+  color:black;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.form .inputTitle{
+  font-size: 12px;
+  color:black;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.inputTitle input {
+  width: 100%;
+}
+
+
+.form .inputSummary{
+  font-size: 12px;
+  color: black;
+  text-align: justify;
+  margin-top: 1.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.inputSummary input {
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.form .multiselect{
+  font-size: 12px;
+  color: black;
+  text-align: justify;
+  margin-top: 1.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.multiselect label {
+  padding: 0.4rem;
+}
+
+.multiselect label input {
+  margin-left: 0.2px;
+  margin-right: 0.5rem;
+  padding: 0.3rem;
+}
+
+.containerSteps{
+  font-size: 12px;
+  color: black;
+  text-align: justify;
+  margin-top: 1.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.containerSteps input{
+  width: 100%;
+  padding-bottom: 5rem;
+}
+
+/* .containerDiets{
+  font-size: 12px;
+  color: black;
+  text-align: justify;
+  margin-top: 1.5rem;
+  margin-left: 2.7rem;
+  margin-right: 4rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.containerDiets span{
+  margin-left: 1.5rem;
+}
+.containerDiets label{
+  margin-left: 0.1rem;
+  padding: 1.4rem;
+}
+
+.containerDiets input {
+  margin-left: 0;
+  margin-right: 0.5rem;
+} */
+
+.containerScore {
+  font-size: 12px;
+  color: black;
+  text-align: justify;
+  margin-top: 3rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.containerScore label{
+  padding: 0.4rem;
+}
+
+.containerScore label input {
+  border-radius: 7px;
+}
+
+.containerImage{
+  font-size: 12px;
+  color: black;
+  text-align: justify;
+  margin-top: 1.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.containerImage label{
+  margin-left: 0.1rem;
+  padding: 0.4rem;
+}
+
+.containerImage input {
+  width: 100%;
+}
+
+.containerSubmit{
+  margin-left: 10rem;
+  margin-right: 10rem;
+  margin-top: 1.5rem;
+}
+
+.btnCreate{
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
+  transition: all 0.2s ease-in;
+  position: relative;
+  overflow: hidden;
+  font-size: 11px;
+  z-index: 1;
+  background-color: #f1d892e7;
+  color: #fff;
+  text-align: justify;
+  margin-top: 1.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  font-family: 'Roboto', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.btnCreate:hover{
+  background-color: #e04f53;
+}
+
+.btnHome{
+  display: inline-block;
+  padding: 10px 25px;
+  border: solid 1px;
+  border-radius: 2px;
+  transition: all 0.2s ease-in;
+  position: relative;
+  overflow: hidden;
+  font-size: 11px;
+  z-index: 1;
+  background-color:#f1d892e7;
+  color: #fff;
+  text-align: justify;
+  margin-top: 1.5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.btnHome:hover{
+  background-color: #e04f53;
+}
