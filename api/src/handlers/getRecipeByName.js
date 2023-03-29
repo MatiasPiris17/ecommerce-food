@@ -26,11 +26,11 @@ const getRecipeByName = async (req, res) => {
     //Objeto de cada receta solo con las propiedades necesarias
     recipesApi = recipesApi.map((recipe) => reduceObjectsRecipes(recipe));
 
-    let recipesDB = await Recipe.findAll({
+    let recipesDB = await Recipe.findAll({ //busca todos los registros de la tabla que cumplan con una determinada condición.
       where: !!name
         ? {
             name: {
-              [Op.substring]: name.toLowerCase(),
+              [Op.substring]: name.toLowerCase(), //se utilizan para especificar las condiciones de búsqueda en las consultas
             },
           }
         : {},
@@ -45,9 +45,7 @@ const getRecipeByName = async (req, res) => {
     recipesDB = recipesDB.map((recipe) => modifyDietAttributes(recipe));
 
     const recipesAll = recipesApi.concat(recipesDB);
-
-    // return res.status(200).send(recipesAll) 
-    // return recipesAll.length ? res.json(recipesAll) : res.json([]);
+    
     if (recipesAll.length) {
       return res.status(200).send(recipesAll) 
     } else {

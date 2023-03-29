@@ -34,13 +34,11 @@ module.exports = (sequelize) => {
       },
       steps: {
         //Paso a paso
-        //type: DataTypes.ARRAY(DataTypes.TEXT),
-        type: DataTypes.JSON,
-        defaultValue: {},
+        type: DataTypes.ARRAY(DataTypes.TEXT),
       },
       image: {
         type: DataTypes.STRING,
-        defaultValue: "https://i.postimg.cc/t4F6nM5b/324.png",
+        //defaultValue: "https://i.postimg.cc/t4F6nM5b/324.png",
         validate: { isUrl: true },
       },
       createdInDb: {

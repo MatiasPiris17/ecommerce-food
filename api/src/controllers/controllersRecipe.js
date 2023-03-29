@@ -12,6 +12,8 @@ const reduceObjectsRecipes = (r) => {
     diets: r.diets.map((e) => e + ', '),
   };
 };
+
+//esta función se utiliza para transformar los objetos de receta recuperados de la base de datos en una estructura más fácil de manejar en la interfaz de usuario.
 const modifyDietAttributes = (r) => {
   r = r.toJSON();
   r.diets = r.diets.map((diet) => diet.name);

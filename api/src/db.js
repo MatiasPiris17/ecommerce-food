@@ -32,7 +32,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Recipe,Diet } = sequelize.models;
 
-// Aca vendrian las relaciones
+// relaciones N°N
 Recipe.belongsToMany(Diet, { through: "RecipeDiet" });
 Diet.belongsToMany(Recipe, { through: "RecipeDiet" });
 
