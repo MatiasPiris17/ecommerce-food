@@ -22,7 +22,7 @@ function Home() {
   const diets = useSelector((state) => state.diets);
 
   const [orden, setOrder] = useState("");
-
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPorPage, setRecipesPorPage] = useState(9);
   const indexOfLastRecipe = currentPage * recipesPorPage;
@@ -36,6 +36,7 @@ function Home() {
   useEffect(() => {
     dispatch(getRecipes()); // eslint-disable-next-line
   }, [dispatch]);
+
   useEffect(() => {
     dispatch(getTypesOfDiet());
   }, [dispatch]);
@@ -85,8 +86,8 @@ function Home() {
           <label>ORDER BY A-Z</label>
           <select onChange={(e) => handleOrderByName(e)}>
             <option disabled selected>Choose an option</option>
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendente</option>
+            <option value="asc">A-Z</option>
+            <option value="desc">Z-A</option>
           </select>
         </div>
         <div className={style.filterScore}>
@@ -131,7 +132,7 @@ function Home() {
         </button>
       </div>
 
-      {/* RECETAS */}
+      {/* RECETAS */} 
       <div className={style.recipesContainer}>
         {currentRecipes &&
           currentRecipes.map((recipe) => {
@@ -156,7 +157,7 @@ function Home() {
 
       {/* PAGUINADO */}
       <div className={style.paginate}>
-        <Paginate
+        <Paginate // Se pasan los valores por pros
           recipesPorPage={recipesPorPage}
           allRecipes={allRecipes.length}
           paginate={paginate}
