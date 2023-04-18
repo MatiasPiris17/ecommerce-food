@@ -11,40 +11,28 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      name: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: { notEmpty: true },
-      },
+        },
       summary: {
-        //Resumen del plato.
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       healthScore: {
-        //Nivel de comida saludable
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-        validate: {
-          min: 0,
-          max: 100,
-        },
+        type: DataTypes.STRING,
       },
-      steps: {
-        //Paso a paso
-        type: DataTypes.ARRAY(DataTypes.TEXT),
+      instructions: {
+        type: DataTypes.TEXT,
       },
       image: {
         type: DataTypes.STRING,
-        //defaultValue: "https://i.postimg.cc/t4F6nM5b/324.png",
-        validate: { isUrl: true },
       },
       createdInDb: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: true,
+        allowNull: false,
       },
     },
     { timestamps: false }

@@ -1,5 +1,6 @@
 const { Router } = require("express");
-const getDiets = require("../handlers/getDiets");
+const {getDiets} = require("../controllers/getDiets");
+
 const router = Router();
 
 router.get("/", getDiets);

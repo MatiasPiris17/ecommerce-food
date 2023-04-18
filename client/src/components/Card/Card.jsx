@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 
-function Card({ name, diets, image, score, id }) {
+function Card({ title, diets, image, score, id }) {
   return (
     <div className={style.card}>
       <div className={style.imgContainer}>
-        <img src={image} alt={name} width="200px" height="250px" />
+        <img src={image} alt={title} width="200px" height="250px" />
       </div>
       <div className={style.cardInfo}>
-        <h3>{name}</h3>
+        <h3>{title}</h3>
       </div>
       <div className={style.itemCard}>
         <p>{diets}</p>

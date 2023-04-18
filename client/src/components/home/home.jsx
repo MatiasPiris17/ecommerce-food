@@ -140,7 +140,7 @@ function Home() {
               <Card
                 key={recipe.id}
                 id={recipe.id}
-                name={recipe.name}
+                title={recipe.title}
                 diets={recipe.diets}
                 image={
                   recipe.image ? (

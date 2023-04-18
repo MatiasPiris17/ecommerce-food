@@ -13,11 +13,6 @@ function SearchBar() {
     const { value } = event.target;
     setName(value);
   }
-  function handleSubmit(event) {
-    event.preventDefault();
-    dispatch(getRecipeByName(name));
-    setName("");
-  }
   useEffect(() => {
     dispatch(getRecipeByName(name));
   }, [dispatch, name]);
@@ -30,9 +25,6 @@ function SearchBar() {
         placeholder="Search..."
         onChange={(e) => handleInputChange(e)}
       />
-      <button className={style.searchButton} type="submit" onSubmit={(e) => handleSubmit(e)}>
-        Search
-      </button>
     </div>
   );
 }

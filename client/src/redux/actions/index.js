@@ -35,11 +35,11 @@ export function getTypesOfDiet() {
   };
 }
 
-export function getRecipeByName(name) {
+export function getRecipeByName(title) {
   return async function (dispatch) {
     try {
       const res = (
-        await axios.get(`http://localhost:3001/recipes?name=${name}`)
+        await axios.get(`http://localhost:3001/recipes?name=${title}`)
       ).data;
       dispatch({ type: GET_RECIPES_BY_NAME, payload: res });
     } catch (error) {

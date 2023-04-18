@@ -1,17 +1,17 @@
-const { getAllRecipes } = require("../controllers/controllersPostRecipe");
+const { getAllRecipes } = require("./data");
 const { Recipe, Diet } = require("../db");
 
 const validateRecipe = async (req, res, next) => {
-  const { name, summary, healthScore, steps, image } = req.body;
+  const { title, summary, healthScore, instructions, image } = req.body;
 
-  if (!name || !summary) {
+  if (!title || !summary) {
     return res.status(400).json({ msg: "Title and summary are required" });
   } else {
     const getAllInfo = await getAllRecipes();
 
     const existRecipe = getAllInfo.find(
-      (e) => e && e.name && e.name.toLowerCase() === name.toLowerCase()
-    );
+      (e) => e.title.toLowerCase() === title.toLowerCase()
+    ); 
 
     if (existRecipe) {
       return res.json({ msg: "Recipe already exist" });
@@ -19,9 +19,9 @@ const validateRecipe = async (req, res, next) => {
   }
 
   if (
-    typeof name !== "string" ||
+    typeof title !== "string" ||
     typeof summary !== "string" ||
-    typeof steps !== "string" ||
+    typeof instructions !== "string" ||
     typeof image !== "string"
   )
     return res.status(400).json({ msg: "will only allow letters" });
@@ -30,27 +30,27 @@ const validateRecipe = async (req, res, next) => {
 };
 
 const createRecipe = async (req, res) => {
-  const { name, summary, healthScore, steps, image, diets } = req.body;
+  const { title, summary, healthScore, instructions, image, diets } = req.body;
 
   try {
     const recipeCreated = await Recipe.create({
-      name,
+      title,
       summary,
       healthScore,
-      steps,
+      instructions,
       image,
     });
 
     const dietsDb = await Diet.findAll({
       where: {
-        name: diets,
+        name: diets
       },
     });
-
-    await recipeCreated.addDiet(dietsDb);
+  
+    await recipeCreated.addDiets(dietsDb);
     return res.status(201).json("Recipe created successfully");
   } catch (err) {
-    return res.status(400).json({ err: err });
+    return res.status(400).json({ err: err.message });
   }
 };
 

@@ -3,19 +3,59 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { getTypesOfDiet, postRecipe } from "../../redux/actions";
-import { validationsForm } from "./Validation/validation";
 import style from "./RecipeForm.module.css";
 
-export default function Form() {
+const validationsForm = (input) => {
+  let errors = {};
+
+  let regexString = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
+
+  if (!input.title || !input.title.trim()) {
+    errors.title = "Title is required";
+  } else if (!regexString.test(input.title.trim())) {
+    errors.title = "Title must be only letters";
+  } else if (input.title.length > 80 || input.title.length < 3) {
+    errors.title = "Title must be between 3 and 80 characters";
+  }
+
+  if (!input.summary || !input.summary.trim()) {
+    errors.summary = "Summary is required";
+  } else if (!regexString.test(input.summary.trim())) {
+    errors.summary = "Summary must be only letters";
+  } else if (input.summary.length > 255 || input.summary.length < 3) {
+    errors.summary = "Summary must be between 3 and 255 characters";
+  }
+
+  if (!input.healthScore) {
+    errors.healthScore = "HealthScore is required";
+  } else if (!Number.isInteger(Number(input.healthScore))) {
+    errors.healthScore = "HealthScore must be an integer";
+  } else if (input.healthScore < 1 || input.healthScore > 100) {
+    errors.healthScore = "HealthScore must be between 1 and 100";
+  }
+
+  if (!input.instructions || !input.instructions.trim()) {
+    errors.instructions = "instructions is required";
+  } else if (input.instructions.length < 3 || input.instructions.length > 1000) {
+    errors.instructions = "instructions must be between 3 and 1000 characters";
+  }
+
+  if (input.diets.length === 0) {
+    errors.diets = "Diets is required";
+  }
+  return errors;
+};
+
+function Form() {
   const dispatch = useDispatch();
   const diets = useSelector((state) => state.diets);
   const history = useHistory();
 
   const [input, setInput] = useState({
-    name: "",
+    title: "",
     summary: "",
     healthScore: 0,
-    steps: "",
+    instructions: "",
     diets: [],
     image: "",
   });
@@ -54,10 +94,10 @@ export default function Form() {
     if (Object.keys(errors).length === 0) {
       alert("Recipe created successfully");
       setInput({
-        name: "",
+        title: "",
         summary: "",
         healthScore: 0,
-        steps: "",
+        instructions: "",
         diets: [],
         image: "",
       });
@@ -81,13 +121,13 @@ export default function Form() {
               <input
                 className={style.input}
                 type="text"
-                name="name"
+                name="title"
                 onBlur={(e) => handleBlur(e)}
-                value={input.name}
+                value={input.title}
                 onChange={(e) => handleChange(e)}
               />
             </div>
-            {errors.name && <p>{errors.name}</p>}
+            {errors.title && <p>{errors.title}</p>}
 
             <div className={style.inputSummary}>
               <label>
@@ -106,19 +146,19 @@ export default function Form() {
             {errors.summary && <p>{errors.summary}</p>}
             <div className={style.containerSteps}>
               <label>
-                <b>STEPS</b>
+                <b>INSTRUCTIONS</b>
               </label>
               <br />
               <input
                 className={style.input}
                 type="text"
-                name="steps"
-                value={input.steps}
+                name="instructions"
+                value={input.instructions}
                 onBlur={(e) => handleBlur(e)}
                 onChange={(e) => handleChange(e)}
               />
             </div>
-            {errors.steps && <p>{errors.steps}</p>}
+            {errors.instructions && <p>{errors.instructions}</p>}
             <div className={style.containerDiets}>
               <span>
                 <b>TYPE OF DIET</b>
@@ -186,3 +226,7 @@ export default function Form() {
     </div>
   );
 }
+
+
+
+export default Form;
